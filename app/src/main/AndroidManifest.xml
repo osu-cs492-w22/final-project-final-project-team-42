@@ -14,6 +14,10 @@
             android:exported="false"
             android:parentActivityName="com.example.infinidnd.MainActivity" />
         <activity
+            android:name="com.example.infinidnd.SchoolsActivity"
+            android:exported="false"
+            android:parentActivityName="com.example.infinidnd.MainActivity" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

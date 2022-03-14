@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">InfiniDnD</string>
+    <string name="search_error">We were unable to execute your search.  Please check your internet connection and try again.</string>
 </resources>
