@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Hello World!"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <Button
+        android:id="@+id/button_monster"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Monsters"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_feats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Feats"
+        app:layout_constraintStart_toStartOf="@+id/button_spells"
+        app:layout_constraintTop_toBottomOf="@+id/button_spells" />
+
+    <Button
+        android:id="@+id/button_spells"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Spells"
+        app:layout_constraintStart_toStartOf="@+id/button_monster"
+        app:layout_constraintTop_toBottomOf="@+id/button_monster" />
+
+    <Button
+        android:id="@+id/button_damage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Damage Types"
+        app:layout_constraintStart_toStartOf="@+id/button_feats"
+        app:layout_constraintTop_toBottomOf="@+id/button_feats" />
+
+    <Button
+        android:id="@+id/button_equipment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Equipment"
+        app:layout_constraintStart_toStartOf="@+id/button_magic_items"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_magic_items"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Magic Items"
+        app:layout_constraintStart_toStartOf="@+id/button_conditions"
+        app:layout_constraintTop_toBottomOf="@+id/button_equipment" />
+
+    <Button
+        android:id="@+id/button_conditions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Conditions"
+        app:layout_constraintStart_toEndOf="@+id/button_damage"
+        app:layout_constraintTop_toBottomOf="@+id/button_magic_items" />
+
+    <Button
+        android:id="@+id/button_schools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Magic Schools"
+        app:layout_constraintStart_toEndOf="@+id/button_damage"
+        app:layout_constraintTop_toBottomOf="@+id/button_conditions" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
