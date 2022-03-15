@@ -18,7 +18,31 @@
         <activity
             android:name=".ui.SchoolDetailActivity"
             android:exported="false"
-            android:parentActivityName=".ui.DamageActivity" />
+            android:parentActivityName=".ui.SchoolsActivity" />
+        <activity
+            android:name=".ui.FeatsDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.FeatsActivity" />
+        <activity
+            android:name=".ui.ConditionsDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.ConditionsActivity" />
+        <activity
+            android:name=".ui.MagicItemsDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.MagicItemsActivity" />
+        <activity
+            android:name="com.example.infinidnd.ui.MagicItemsActivity"
+            android:exported="false"
+            android:parentActivityName="com.example.infinidnd.ui.MainActivity" />
+        <activity
+            android:name="com.example.infinidnd.ui.ConditionsActivity"
+            android:exported="false"
+            android:parentActivityName="com.example.infinidnd.ui.MainActivity" />
+        <activity
+            android:name="com.example.infinidnd.ui.FeatsActivity"
+            android:exported="false"
+            android:parentActivityName="com.example.infinidnd.ui.MainActivity" />
         <activity
             android:name="com.example.infinidnd.ui.DamageActivity"
             android:exported="false"
