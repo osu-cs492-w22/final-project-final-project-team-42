@@ -3,19 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/ianba/AndroidStudioProjects/final-project-final-project-team-42/app/src/main/res/layout/activity_condition_detail.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/ianba/AndroidStudioProjects/final-project-final-project-team-42/app/src/main/res/layout/activity_conditions.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/ianba/AndroidStudioProjects/final-project-final-project-team-42/app/src/main/res/layout/activity_damage.xml" value="0.14130434782608695" />
-        <entry key="..\:/Users/ianba/AndroidStudioProjects/final-project-final-project-team-42/app/src/main/res/layout/activity_damage_detail.xml" value="0.16847826086956522" />
-        <entry key="..\:/Users/ianba/AndroidStudioProjects/final-project-final-project-team-42/app/src/main/res/layout/activity_feat_detail.xml" value="0.16847826086956522" />
-        <entry key="..\:/Users/ianba/AndroidStudioProjects/final-project-final-project-team-42/app/src/main/res/layout/activity_feats.xml" value="0.128125" />
-        <entry key="..\:/Users/ianba/AndroidStudioProjects/final-project-final-project-team-42/app/src/main/res/layout/activity_magic_item_detail.xml" value="0.1" />
-        <entry key="..\:/Users/ianba/AndroidStudioProjects/final-project-final-project-team-42/app/src/main/res/layout/activity_magic_items.xml" value="0.1" />
-        <entry key="..\:/Users/ianba/AndroidStudioProjects/final-project-final-project-team-42/app/src/main/res/layout/activity_school_detail.xml" value="0.16847826086956522" />
-        <entry key="..\:/Users/ianba/AndroidStudioProjects/final-project-final-project-team-42/app/src/main/res/layout/activity_schools.xml" value="0.16847826086956522" />
-        <entry key="app/src/main/res/layout/activity_damage.xml" value="0.2603071948261924" />
+        <entry key="..\:/Users/Piers/AndroidStudioProjects/final-project-final-project-team-42/app/src/main/res/layout/activity_damage_detail.xml" value="0.16530797101449277" />
+        <entry key="..\:/Users/Piers/AndroidStudioProjects/final-project-final-project-team-42/app/src/main/res/layout/equipment_detail_activity.xml" value="0.16302083333333334" />
+        <entry key="app/src/main/res/layout/activity_damage.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35733695652173914" />
+        <entry key="app/src/main/res/layout/activity_school_detail.xml" value="0.17443351859769132" />
         <entry key="app/src/main/res/layout/activity_schools.xml" value="0.30611372381359553" />
+        <entry key="app/src/main/res/layout/activity_schools_detail.xml" value="0.17443351859769132" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.20172257479601088" />
+        <entry key="app/src/main/res/layout/damage_type_list_item.xml" value="0.30611372381359553" />
+        <entry key="app/src/main/res/menu/activity_main.xml" value="0.2902949978623343" />
       </map>
     </option>
   </component>
