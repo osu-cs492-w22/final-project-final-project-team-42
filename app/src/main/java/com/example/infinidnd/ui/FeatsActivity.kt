@@ -1,10 +1,14 @@
 package com.example.infinidnd.ui
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
@@ -15,6 +19,7 @@ import com.example.infinidnd.data.AllData
 import com.example.infinidnd.data.FeatDetails
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.android.material.snackbar.Snackbar
 
 class FeatsActivity : AppCompatActivity() {
 
@@ -116,5 +121,34 @@ class FeatsActivity : AppCompatActivity() {
             putExtra(EXTRA_FEAT_DATA, allData)
         }
         startActivity(intent)
+    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.activity_details, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.action_dnd_beyond -> {
+                viewOnWeb()
+                true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun viewOnWeb() {
+        val intent: Intent = Uri.parse("https://www.dndbeyond.com/feats").let {
+            Intent(Intent.ACTION_VIEW, it)
+        }
+        try {
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            Snackbar.make(
+                findViewById(R.id.coordinator_layout),
+                "There's no app on this device that can open a web page...",
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
     }
 }
