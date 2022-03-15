@@ -2,6 +2,7 @@ package com.example.infinidnd.ui
 
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.view.Menu
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -29,5 +30,10 @@ class SchoolDetailActivity : AppCompatActivity() {
 
             viewModel.loadSearchResults(schoolData!!.index)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.activity_details, menu)
+        return true
     }
 }
