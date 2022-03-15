@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.infinidnd">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,15 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InfiniDnD">
         <activity
-            android:name="com.example.infinidnd.DamageActivity"
+            android:name="com.example.infinidnd.ui.DamageActivity"
             android:exported="false"
-            android:parentActivityName="com.example.infinidnd.MainActivity" />
+            android:parentActivityName="com.example.infinidnd.ui.MainActivity" />
         <activity
-            android:name="com.example.infinidnd.SchoolsActivity"
+            android:name="com.example.infinidnd.ui.SchoolsActivity"
             android:exported="false"
-            android:parentActivityName="com.example.infinidnd.MainActivity" />
+            android:parentActivityName="com.example.infinidnd.ui.MainActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
