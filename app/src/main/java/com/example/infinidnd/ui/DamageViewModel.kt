@@ -21,12 +21,19 @@ class DamageViewModel : ViewModel() {
     private val _searchResults = MutableLiveData<DamageTypeDetails>(null)
     val searchResults: LiveData<DamageTypeDetails?> = _searchResults
 
+    private val _nameList = MutableLiveData<List<String>>(null)
+    val nameList: LiveData<List<String>> = _nameList
     fun loadAllData(
         type: String
     ) {
         viewModelScope.launch {
             val result = alLDataRepository.loadAllData(type)
             _allTypes.value = result.getOrNull()
+            var names : List<String> = listOf()
+            for (i in _allTypes.value!!){
+                names += i.index
+            }
+            _nameList.value = names
         }
     }
 
@@ -37,7 +44,7 @@ class DamageViewModel : ViewModel() {
             Log.d("Viewmodel/Sending type", "${type}")
             val result = respository.loadDamageSearch(type)
 
-            Log.d("Viewmodel/Received result", "${result}")
+            Log.d("Viewmodel/Received resu", "${result}")
             _searchResults.value = result.getOrNull()
         }
     }

@@ -6,16 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.google.android.material.textfield.TextInputLayout
+    <AutoCompleteTextView
+        android:id="@+id/damage_search_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:hint="Search Damage Types">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/damage_search_box"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="32sp"
+        android:hint="Search Damage Types"/>
 
     <Button
         android:id="@+id/btn_search"
