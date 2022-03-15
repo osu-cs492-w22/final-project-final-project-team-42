@@ -1,18 +1,30 @@
 package com.example.infinidnd.ui
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
+import androidx.preference.PreferenceManager
 import com.example.infinidnd.R
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("main", "oncreate")
+        val pref = PreferenceManager.getDefaultSharedPreferences(this)
+        val theme: String? = pref.getString("mode", "two")
+        val layout: Int
+        if (theme == "two") layout = R.layout.activity_main else layout = R.layout.activity_main_1
+
+        Log.d("Theme: ", theme.toString())
+        Log.d("layout: ", layout.toString())
+
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(layout)
 
         val damageBtn: Button = findViewById(R.id.button_damage)
         damageBtn.setOnClickListener {
