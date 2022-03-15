@@ -32,7 +32,8 @@ class MagicItemsDetailActivity : AppCompatActivity() {
                     }
                 }
                 findViewById<TextView>(R.id.tv_desc).text = desc
-                findViewById<TextView>(R.id.tv_equipment_category).text = magicItemDetails?.equipmentCategory
+                val equipCat = "Equipment Category: " +  magicItemDetails?.equipmentCategory
+                findViewById<TextView>(R.id.tv_equipment_category).text = equipCat
 
             }
         }

@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.infinidnd.api.AllDataService
 import com.example.infinidnd.api.FeatService
-import com.example.infinidnd.api.SchoolsService
 import com.example.infinidnd.data.*
 import kotlinx.coroutines.launch
 

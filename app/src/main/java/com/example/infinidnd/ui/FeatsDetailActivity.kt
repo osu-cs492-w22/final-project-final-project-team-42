@@ -32,9 +32,11 @@ class FeatsDetailActivity : AppCompatActivity() {
                         desc += i + "\n"
                     }
                 }
+                val abilityScore = "Ability Score: "+featDetails?.abilityScore
+                val minScore = "Minimum Score: " + featDetails?.minScore.toString()
                 findViewById<TextView>(R.id.tv_desc).text = desc
-                findViewById<TextView>(R.id.tv_ability_score).text = featDetails?.abilityScore
-                findViewById<TextView>(R.id.tv_min_score).text = featDetails?.minScore.toString()
+                findViewById<TextView>(R.id.tv_ability_score).text = abilityScore
+                findViewById<TextView>(R.id.tv_min_score).text = minScore
             }
 
         }
