@@ -16,11 +16,27 @@
             android:exported="false"
             android:parentActivityName=".ui.DamageActivity" />
         <activity
+            android:name=".ui.EquipmentDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.EquipmentActivity" />
+        <activity
             android:name="com.example.infinidnd.ui.DamageActivity"
             android:exported="false"
             android:parentActivityName="com.example.infinidnd.ui.MainActivity" />
         <activity
             android:name="com.example.infinidnd.ui.SchoolsActivity"
+            android:exported="false"
+            android:parentActivityName="com.example.infinidnd.ui.MainActivity" />
+        <activity
+            android:name="com.example.infinidnd.ui.SpellsActivity"
+            android:exported="false"
+            android:parentActivityName="com.example.infinidnd.ui.MainActivity" />
+        <activity
+            android:name="com.example.infinidnd.ui.MonstersActivity"
+            android:exported="false"
+            android:parentActivityName="com.example.infinidnd.ui.MainActivity" />
+        <activity
+            android:name="com.example.infinidnd.ui.EquipmentActivity"
             android:exported="false"
             android:parentActivityName="com.example.infinidnd.ui.MainActivity" />
         <activity

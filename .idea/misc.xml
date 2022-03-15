@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Piers/AndroidStudioProjects/final-project-final-project-team-42/app/src/main/res/layout/activity_damage_detail.xml" value="0.16530797101449277" />
+        <entry key="..\:/Users/Piers/AndroidStudioProjects/final-project-final-project-team-42/app/src/main/res/layout/equipment_detail_activity.xml" value="0.16302083333333334" />
         <entry key="app/src/main/res/layout/activity_damage.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_damage_detail.xml" value="0.20172257479601088" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35733695652173914" />
         <entry key="app/src/main/res/layout/activity_schools.xml" value="0.30611372381359553" />
         <entry key="app/src/main/res/layout/damage_type_list_item.xml" value="0.30611372381359553" />

@@ -21,6 +21,18 @@ class MainActivity : AppCompatActivity() {
         schoolsBtn.setOnClickListener {
             startActivity(Intent(this, SchoolsActivity::class.java))
         }
+        val monstersBtn: Button = findViewById(R.id.button_monster)
+        monstersBtn.setOnClickListener {
+            startActivity(Intent(this, MonstersActivity::class.java))
+        }
+        val equipmentBtn: Button = findViewById(R.id.button_equipment)
+        equipmentBtn.setOnClickListener {
+            startActivity(Intent(this, EquipmentActivity::class.java))
+        }
+        val spellsBtn: Button = findViewById(R.id.button_spells)
+        spellsBtn.setOnClickListener {
+            startActivity(Intent(this, SpellsActivity::class.java))
+        }
 
     }
 }
