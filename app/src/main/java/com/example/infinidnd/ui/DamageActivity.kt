@@ -14,7 +14,6 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.infinidnd.data.AllData
-import com.example.infinidnd.data.DamageType
 import com.example.infinidnd.data.DamageTypeDetails
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.progressindicator.CircularProgressIndicator
@@ -31,6 +30,7 @@ class DamageActivity : AppCompatActivity() {
     private lateinit var detailsNameTV: TextView
     private lateinit var detailsDescTV: TextView
     private lateinit var detailsIndexTV: TextView
+    private lateinit var detailsUrlTV: TextView
     private lateinit var damageDetails: MaterialCardView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,9 +50,17 @@ class DamageActivity : AppCompatActivity() {
         detailsNameTV = findViewById(R.id.tv_damage_name)
         detailsDescTV = findViewById(R.id.tv_damage_desc)
         detailsIndexTV = findViewById(R.id.tv_damage_index)
+        detailsUrlTV = findViewById(R.id.tv_damage_url)
         damageDetails = findViewById(R.id.damage_details)
 
         damageDetails.visibility = View.INVISIBLE
+        damageDetails.setOnClickListener {
+            val damageData = AllData(detailsNameTV.text.toString(), detailsIndexTV.text.toString(), detailsUrlTV.text.toString())
+            val intent = Intent(this, DamageDetailActivity::class.java).apply{
+                putExtra(EXTRA_DAMAGE_DATA, damageData)
+            }
+            startActivity(intent)
+        }
 
         viewModel.allTypes.observe(this) { damageType ->
             allDataAdapter.updateAllDataList(damageType)
@@ -63,6 +71,10 @@ class DamageActivity : AppCompatActivity() {
 
             Log.d("Damage Type Details", "$damageTypeDetails")
             detailsNameTV.text = damageTypeDetails?.name
+            detailsDescTV.text = damageTypeDetails?.desc?.get(0)
+            detailsIndexTV.text = damageTypeDetails?.index
+            detailsUrlTV.text = damageTypeDetails?.url
+
             damageDetails.visibility = View.VISIBLE
         }
 
@@ -89,11 +101,13 @@ class DamageActivity : AppCompatActivity() {
     }
 
     private fun onAllDataClick(allData: AllData) {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, DamageDetailActivity::class.java).apply {
+            putExtra(EXTRA_DAMAGE_DATA, allData)
+        }
         startActivity(intent)
     }
 
-    private fun onDamageTypeDetailsClick(damageType: DamageTypeDetails) {
+    private fun onDamageDetailsClick(damageType: DamageTypeDetails) {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
