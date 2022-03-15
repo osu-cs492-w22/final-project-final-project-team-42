@@ -7,4 +7,5 @@ data class DamageTypeDetails(
     @Json(name = "name") val name: String,
     @Json(name = "desc") val desc: List<String>,
     @Json(name = "url") val url: String,
+    @Json(name = "index") val index: String,
 ) : Serializable

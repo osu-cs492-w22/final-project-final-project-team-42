@@ -12,6 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InfiniDnD">
         <activity
+            android:name=".ui.DamageDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.DamageActivity" />
+        <activity
+            android:name=".ui.SchoolDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.DamageActivity" />
+        <activity
             android:name="com.example.infinidnd.ui.DamageActivity"
             android:exported="false"
             android:parentActivityName="com.example.infinidnd.ui.MainActivity" />

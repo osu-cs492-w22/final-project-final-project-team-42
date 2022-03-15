@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.infinidnd.R
 import com.example.infinidnd.data.AllData
-import com.example.infinidnd.data.DamageType
 
 class AllDataAdapter(private val onAllDataClick: (AllData) -> Unit)
     : RecyclerView.Adapter<AllDataAdapter.AllDataViewHolder>() {
