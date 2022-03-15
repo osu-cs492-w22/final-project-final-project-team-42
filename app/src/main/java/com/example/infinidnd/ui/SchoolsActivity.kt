@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.Menu
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -98,12 +99,15 @@ class SchoolsActivity : AppCompatActivity() {
 
     }
 
-
-    //TODO: change to schools detail activity
     private fun onAllDataClick(allData: AllData) {
         val intent = Intent(this, SchoolDetailActivity::class.java).apply {
             putExtra(EXTRA_SCHOOL_DATA, allData)
         }
         startActivity(intent)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.activity_details, menu)
+        return true
     }
 }

@@ -14,7 +14,6 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.infinidnd.data.AllData
-import com.example.infinidnd.data.DamageType
 import com.example.infinidnd.data.DamageTypeDetails
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.progressindicator.CircularProgressIndicator
