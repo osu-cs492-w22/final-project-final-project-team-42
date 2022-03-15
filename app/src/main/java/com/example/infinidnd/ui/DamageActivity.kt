@@ -6,9 +6,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.*
 import com.example.infinidnd.R
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,7 +22,7 @@ class DamageActivity : AppCompatActivity() {
     private val viewModel: DamageViewModel by viewModels()
 
     private lateinit var searchResultsRV: RecyclerView
-    private lateinit var searchBox: EditText
+    private lateinit var searchBox: AutoCompleteTextView
     private lateinit var searchErrorTV: TextView
     private lateinit var loadingIndicator: CircularProgressIndicator
     private lateinit var detailsNameTV: TextView
@@ -38,6 +36,7 @@ class DamageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_damage)
 
         searchBox = findViewById(R.id.damage_search_box)
+
         searchResultsRV = findViewById(R.id.rv_search_results)
         searchErrorTV = findViewById(R.id.tv_search_error)
         loadingIndicator = findViewById(R.id.loading_indicator)
@@ -79,6 +78,16 @@ class DamageActivity : AppCompatActivity() {
         }
 
         viewModel.loadAllData("damage-types")
+
+        viewModel.nameList.observe(this) { nameList ->
+            if(!nameList.isNullOrEmpty()) {
+                val adapter = ArrayAdapter(
+                    this,
+                    android.R.layout.simple_list_item_1, nameList
+                )
+                searchBox.setAdapter(adapter)
+            }
+        }
 
         // onclick for search button - hides overall results, loads
         val searchBtn: Button = findViewById(R.id.btn_search)
