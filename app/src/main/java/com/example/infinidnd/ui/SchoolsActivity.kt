@@ -10,9 +10,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.*
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,7 +26,7 @@ class SchoolsActivity : AppCompatActivity() {
     private val viewModel: SchoolsViewModel by viewModels()
 
     private lateinit var searchResultsRV: RecyclerView
-    private lateinit var searchBox: EditText
+    private lateinit var searchBox: AutoCompleteTextView
     private lateinit var searchErrorTV: TextView
     private lateinit var loadingIndicator: CircularProgressIndicator
     private lateinit var detailsNameTV: TextView
@@ -78,6 +76,15 @@ class SchoolsActivity : AppCompatActivity() {
             detailsUrlTV.text = magicSchoolDetails?.url
 
             schoolDetails.visibility = View.VISIBLE
+        }
+        viewModel.nameList.observe(this) { nameList ->
+            if(!nameList.isNullOrEmpty()) {
+                val adapter = ArrayAdapter(
+                    this,
+                    android.R.layout.simple_list_item_1, nameList
+                )
+                searchBox.setAdapter(adapter)
+            }
         }
 
         viewModel.loadAllData("magic-schools")
