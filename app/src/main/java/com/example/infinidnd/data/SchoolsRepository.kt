@@ -1,23 +1,23 @@
 package com.example.infinidnd.data
 
 import android.util.Log
-import com.example.infinidnd.api.DamageService
+import com.example.infinidnd.api.SchoolsService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 
-class DamageRepository(
-    private val service: DamageService,
+class SchoolsRepository(
+    private val service: SchoolsService,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-    suspend fun loadDamageSearch(
+    suspend fun loadSchoolsSearch(
         index: String
-    ) : Result<DamageTypeDetails> =
+    ) : Result<MagicSchoolDetails> =
         withContext(ioDispatcher) {
             try {
-                Log.d("Respository/Received result", "${service.searchDamageTypes(index)}")
-                val results = service.searchDamageTypes(
+                Log.d("Respository/Received result", "${service.searchMagicSchools(index)}")
+                val results = service.searchMagicSchools(
                     index
                 )
                 Log.d("Respository/Received result", "${results}")
