@@ -28,6 +28,14 @@
             android:exported="false"
             android:parentActivityName=".ui.EquipmentActivity" />
         <activity
+            android:name=".ui.MonstersDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.MonstersActivity" />
+        <activity
+            android:name=".ui.SpellsDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.SpellsActivity" />
+        <activity
             android:name="com.example.infinidnd.ui.DamageActivity"
             android:exported="false"
             android:parentActivityName="com.example.infinidnd.ui.MainActivity" />

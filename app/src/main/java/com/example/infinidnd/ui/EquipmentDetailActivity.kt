@@ -27,21 +27,40 @@ class EquipmentDetailActivity : AppCompatActivity() {
             viewModel.loadSearchResults(equipmentData!!.index)
             viewModel.searchResults.observe(this) { equipmentDetails ->
                 Log.d("Equipment Details:", equipmentDetails.toString())
-                findViewById<TextView>(R.id.tv_equipment_type).text = equipmentDetails?.weaponCat
-//                findViewById<TextView>(R.id.tv_equipment_range).text = equipmentDetails?.weaponRange
-//                findViewById<TextView>(R.id.tv_equipment_cost_num).text = equipmentDetails?.costNum.toString()
-//                findViewById<TextView>(R.id.tv_equipment_cost_type).text = equipmentDetails?.costType
-//                findViewById<TextView>(R.id.tv_equipment_dmg_dice).text = equipmentDetails?.damageDice
-//                findViewById<TextView>(R.id.tv_equipment_dmg_type).text = equipmentDetails?.dmgType
-//                findViewById<TextView>(R.id.tv_equipment_rng_norm).text = equipmentDetails?.rngNorm.toString()
-//                findViewById<TextView>(R.id.tv_equipment_rng_long).text = equipmentDetails?.rngLong?.toString()
-//                var properties = ""
-//                if(!equipmentDetails?.property.isNullOrEmpty()) {
-//                    for (i in equipmentDetails?.property!!) {
-//                        properties += i + "\n"
-//                    }
-                //}
-                //findViewById<TextView>(R.id.tv_equipment_properties).text = properties
+                var temp: String
+                temp = "Cost: " + equipmentDetails?.costNum.toString() + equipmentDetails?.costType
+                findViewById<TextView>(R.id.tv_equipment_cost_num).text = temp
+                if(equipmentDetails?.equipmentCat == "Weapon") {
+                    temp = "Weapon Type: " + equipmentDetails?.weaponCat
+                    findViewById<TextView>(R.id.tv_equipment_type).text = temp
+
+                    temp = " Weapon Range: " + equipmentDetails?.weaponRange
+                    findViewById<TextView>(R.id.tv_equipment_range).text = temp
+
+                    temp = "Damage: " + equipmentDetails?.damageDice + " " + equipmentDetails?.dmgType
+                    findViewById<TextView>(R.id.tv_equipment_dmg_dice).text = temp
+
+                    temp = equipmentDetails?.rngNorm.toString() + "/" + equipmentDetails?.rngLong.toString()
+                    findViewById<TextView>(R.id.tv_equipment_rng_norm).text = temp
+
+                }
+                if(equipmentDetails?.equipmentCat == "Tools"){
+                    findViewById<TextView>(R.id.tv_equipment_type).text =
+                        equipmentDetails?.toolCat
+                    findViewById<TextView>(R.id.tv_equipment_dmg_dice).text = equipmentDetails?.description?.get(0)
+                }
+                if(equipmentDetails?.equipmentCat == "Adventuring Gear"){
+                    findViewById<TextView>(R.id.tv_equipment_type).text =
+                        equipmentDetails?.gearCat
+                }
+                if(equipmentDetails?.equipmentCat == "Mounts and Vehicles"){
+                    findViewById<TextView>(R.id.tv_equipment_type).text =
+                        equipmentDetails?.vehicleCat
+                    if(!equipmentDetails?.description.isNullOrEmpty()) {
+                        findViewById<TextView>(R.id.tv_equipment_dmg_dice).text =
+                            equipmentDetails?.description?.get(0)
+                    }
+                }
             }
 
 

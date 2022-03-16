@@ -14,7 +14,6 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.infinidnd.data.AllData
-import com.example.infinidnd.data.DamageType
 import com.example.infinidnd.data.DamageTypeDetails
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.progressindicator.CircularProgressIndicator
@@ -57,8 +56,9 @@ class EquipmentActivity : AppCompatActivity() {
         damageDetails.visibility = View.INVISIBLE
         damageDetails.setOnClickListener {
             val damageData = AllData(detailsNameTV.text.toString(), detailsIndexTV.text.toString(), detailsUrlTV.text.toString())
+            Log.d("Equipment Data: ", "$damageData")
             val intent = Intent(this, EquipmentDetailActivity::class.java).apply{
-                putExtra(EXTRA_DAMAGE_DATA, damageData)
+                putExtra(EXTRA_EQUIPMENT_DATA, damageData)
             }
             startActivity(intent)
         }
@@ -72,6 +72,8 @@ class EquipmentActivity : AppCompatActivity() {
 
             Log.d("Damage Type Details", "$damageTypeDetails")
             detailsNameTV.text = damageTypeDetails?.name
+            detailsIndexTV.text = damageTypeDetails?.index
+            detailsUrlTV.text = damageTypeDetails?.url
             damageDetails.visibility = View.VISIBLE
         }
 

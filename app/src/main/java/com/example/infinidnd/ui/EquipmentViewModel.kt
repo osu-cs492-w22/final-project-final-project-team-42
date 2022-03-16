@@ -38,7 +38,7 @@ class EquipmentViewModel : ViewModel() {
             Log.d("Viewmodel/Sending type", "${type}")
             val result = respository.loadEquipmentSearch(type)
 
-            Log.d("Viewmodel/Received result", "${result}")
+            Log.d("Viewmodel/Received resu", "${result}")
             _searchResults.value = result.getOrNull()
         }
     }

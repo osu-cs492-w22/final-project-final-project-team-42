@@ -3,22 +3,23 @@ package com.example.infinidnd.data
 import android.util.Log
 import com.example.infinidnd.api.DamageService
 import com.example.infinidnd.api.EquipmentService
+import com.example.infinidnd.api.MonstersService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 
-class EquipmentRepository(
-    private val service: EquipmentService,
+class MonstersRepository(
+    private val service: MonstersService,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-    suspend fun loadEquipmentSearch(
+    suspend fun loadMonsterSearch(
         index: String
-    ) : Result<EquipmentDetails> =
+    ) : Result<MonstersDetails> =
         withContext(ioDispatcher) {
             try {
-                Log.d("Respository/Received ", "${service.searchEquipment(index)}")
-                val results = service.searchEquipment(
+                Log.d("Respository/Received ", "${service.searchMonsters(index)}")
+                val results = service.searchMonsters(
                     index
                 )
                 Log.d("Respository/Received ", "${results}")

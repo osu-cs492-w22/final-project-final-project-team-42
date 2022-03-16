@@ -14,7 +14,6 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.infinidnd.data.AllData
-import com.example.infinidnd.data.DamageType
 import com.example.infinidnd.data.DamageTypeDetails
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.progressindicator.CircularProgressIndicator
@@ -56,9 +55,13 @@ class SpellsActivity : AppCompatActivity() {
 
         damageDetails.visibility = View.INVISIBLE
         damageDetails.setOnClickListener {
-            val damageData = AllData(detailsNameTV.text.toString(), detailsIndexTV.text.toString(), detailsUrlTV.text.toString())
-            val intent = Intent(this, DamageDetailActivity::class.java).apply{
-                putExtra(EXTRA_DAMAGE_DATA, damageData)
+            val damageData = AllData(
+                detailsNameTV.text.toString(),
+                detailsIndexTV.text.toString(),
+                detailsUrlTV.text.toString()
+            )
+            val intent = Intent(this, SpellsDetailActivity::class.java).apply {
+                putExtra(EXTRA_SPELLS_DATA, damageData)
             }
             startActivity(intent)
         }
@@ -70,8 +73,10 @@ class SpellsActivity : AppCompatActivity() {
 
         viewModel.searchResults.observe(this) { damageTypeDetails ->
 
-            Log.d("Damage Type Details", "$damageTypeDetails")
+            Log.d("Spell Details", "$damageTypeDetails")
             detailsNameTV.text = damageTypeDetails?.name
+            detailsIndexTV.text = damageTypeDetails?.index
+            detailsUrlTV.text = damageTypeDetails?.url
             damageDetails.visibility = View.VISIBLE
         }
 
@@ -98,12 +103,9 @@ class SpellsActivity : AppCompatActivity() {
     }
 
     private fun onAllDataClick(allData: AllData) {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun onDamageTypeDetailsClick(damageType: DamageTypeDetails) {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, SpellsDetailActivity::class.java).apply {
+            putExtra(EXTRA_SPELLS_DATA,allData)
+        }
         startActivity(intent)
     }
 }

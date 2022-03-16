@@ -14,7 +14,6 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.infinidnd.data.AllData
-import com.example.infinidnd.data.DamageType
 import com.example.infinidnd.data.DamageTypeDetails
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.progressindicator.CircularProgressIndicator
@@ -22,7 +21,7 @@ import com.google.android.material.progressindicator.CircularProgressIndicator
 class MonstersActivity : AppCompatActivity() {
 
     private val allDataAdapter = AllDataAdapter(::onAllDataClick)
-    private val viewModel: DamageViewModel by viewModels()
+    private val viewModel: MonstersViewModel by viewModels()
 
     private lateinit var searchResultsRV: RecyclerView
     private lateinit var searchBox: EditText
@@ -57,8 +56,8 @@ class MonstersActivity : AppCompatActivity() {
         damageDetails.visibility = View.INVISIBLE
         damageDetails.setOnClickListener {
             val damageData = AllData(detailsNameTV.text.toString(), detailsIndexTV.text.toString(), detailsUrlTV.text.toString())
-            val intent = Intent(this, DamageDetailActivity::class.java).apply{
-                putExtra(EXTRA_DAMAGE_DATA, damageData)
+            val intent = Intent(this, MonstersDetailActivity::class.java).apply{
+                putExtra(EXTRA_MONSTER_DATA, damageData)
             }
             startActivity(intent)
         }
@@ -72,6 +71,8 @@ class MonstersActivity : AppCompatActivity() {
 
             Log.d("Damage Type Details", "$damageTypeDetails")
             detailsNameTV.text = damageTypeDetails?.name
+            detailsIndexTV.text = damageTypeDetails?.index
+            detailsUrlTV.text = damageTypeDetails?.url
             damageDetails.visibility = View.VISIBLE
         }
 
@@ -98,12 +99,9 @@ class MonstersActivity : AppCompatActivity() {
     }
 
     private fun onAllDataClick(allData: AllData) {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun onDamageTypeDetailsClick(damageType: DamageTypeDetails) {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, MonstersDetailActivity::class.java).apply {
+            putExtra(EXTRA_MONSTER_DATA,allData)
+        }
         startActivity(intent)
     }
 }
