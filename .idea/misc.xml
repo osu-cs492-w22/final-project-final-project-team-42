@@ -3,16 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout-v28/activity_damage_detail.xml" value="0.20471014492753623" />
         <entry key="app/src/main/res/layout/activity_damage.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_damage_detail.xml" value="0.20172257479601088" />
+        <entry key="app/src/main/res/layout/activity_equipment_detail.xml" value="0.14187212703719182" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.31865284974093266" />
         <entry key="app/src/main/res/layout/activity_main_1.xml" value="0.28662420382165604" />
         <entry key="app/src/main/res/layout/activity_school_detail.xml" value="0.17443351859769132" />
         <entry key="app/src/main/res/layout/activity_schools.xml" value="0.30611372381359553" />
         <entry key="app/src/main/res/layout/activity_schools_detail.xml" value="0.17443351859769132" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.20172257479601088" />
-        <entry key="app/src/main/res/layout/activity_spells.xml" value="0.20489573889392565" />
         <entry key="app/src/main/res/layout/damage_type_list_item.xml" value="0.30611372381359553" />
         <entry key="app/src/main/res/menu/activity_details.xml" value="0.2902949978623343" />
         <entry key="app/src/main/res/menu/activity_main.xml" value="0.2902949978623343" />

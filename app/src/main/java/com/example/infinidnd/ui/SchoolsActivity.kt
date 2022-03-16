@@ -14,6 +14,7 @@ import android.widget.*
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.githubsearchwithsettings.data.LoadingStatus
 import com.example.infinidnd.R
 import com.example.infinidnd.data.AllData
 import com.google.android.material.card.MaterialCardView
@@ -77,6 +78,7 @@ class SchoolsActivity : AppCompatActivity() {
 
             schoolDetails.visibility = View.VISIBLE
         }
+
         viewModel.nameList.observe(this) { nameList ->
             if(!nameList.isNullOrEmpty()) {
                 val adapter = ArrayAdapter(
@@ -88,6 +90,30 @@ class SchoolsActivity : AppCompatActivity() {
         }
 
         viewModel.loadAllData("magic-schools")
+
+        viewModel.loadingStatus.observe(this) { uiState ->
+            when (uiState) {
+                LoadingStatus.LOADING -> {
+                    loadingIndicator.visibility = View.VISIBLE
+                    searchResultsRV.visibility = View.INVISIBLE
+                    searchErrorTV.visibility = View.INVISIBLE
+                    schoolDetails.visibility = View.GONE
+                }
+                LoadingStatus.ERROR -> {
+                    loadingIndicator.visibility = View.INVISIBLE
+                    searchResultsRV.visibility = View.INVISIBLE
+                    searchErrorTV.visibility = View.VISIBLE
+                    schoolDetails.visibility = View.GONE
+                }
+                else -> {
+                    loadingIndicator.visibility = View.INVISIBLE
+                    if(detailsNameTV.text.isNullOrEmpty()) {
+                        searchResultsRV.visibility = View.VISIBLE
+                    }
+                    searchErrorTV.visibility = View.INVISIBLE
+                }
+            }
+        }
 
         // onclick for search button - hides overall results, loads
         val searchBtn: Button = findViewById(R.id.btn_search)

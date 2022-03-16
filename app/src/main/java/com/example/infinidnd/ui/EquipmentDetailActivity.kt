@@ -1,13 +1,20 @@
 package com.example.infinidnd.ui
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.infinidnd.R
 import com.example.infinidnd.data.AllData
+import com.google.android.material.snackbar.Snackbar
+import org.w3c.dom.Text
 
 const val EXTRA_EQUIPMENT_DATA = "com.example.infinidnd.AllData"
 
@@ -43,17 +50,19 @@ class EquipmentDetailActivity : AppCompatActivity() {
                     temp = equipmentDetails?.rngNorm.toString() + "/" + equipmentDetails?.rngLong.toString()
                     findViewById<TextView>(R.id.tv_equipment_rng_norm).text = temp
 
-                }
-                if(equipmentDetails?.equipmentCat == "Tools"){
+                } else if(equipmentDetails?.equipmentCat == "Tools") {
                     findViewById<TextView>(R.id.tv_equipment_type).text =
                         equipmentDetails?.toolCat
-                    findViewById<TextView>(R.id.tv_equipment_dmg_dice).text = equipmentDetails?.description?.get(0)
-                }
-                if(equipmentDetails?.equipmentCat == "Adventuring Gear"){
+                    findViewById<TextView>(R.id.tv_equipment_dmg_dice).text =
+                        equipmentDetails?.description?.get(0)
+                } else if(equipmentDetails?.equipmentCat == "Adventuring Gear"){
                     findViewById<TextView>(R.id.tv_equipment_type).text =
                         equipmentDetails?.gearCat
-                }
-                if(equipmentDetails?.equipmentCat == "Mounts and Vehicles"){
+                    if(!equipmentDetails?.description.isNullOrEmpty()) {
+                        findViewById<TextView>(R.id.tv_equipment_dmg_dice).text =
+                            equipmentDetails?.description?.get(0)
+                    }
+                } else if(equipmentDetails?.equipmentCat == "Mounts and Vehicles"){
                     findViewById<TextView>(R.id.tv_equipment_type).text =
                         equipmentDetails?.vehicleCat
                     if(!equipmentDetails?.description.isNullOrEmpty()) {
@@ -64,6 +73,36 @@ class EquipmentDetailActivity : AppCompatActivity() {
             }
 
 
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.activity_details, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.action_dnd_beyond -> {
+                viewOnWeb()
+                true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun viewOnWeb() {
+        val intent: Intent = Uri.parse("https://www.dndbeyond.com/equipment").let {
+            Intent(Intent.ACTION_VIEW, it)
+        }
+        try {
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            Snackbar.make(
+                findViewById(R.id.coordinator_layout),
+                "There's no app on this device that can open a web page...",
+                Snackbar.LENGTH_LONG
+            ).show()
         }
     }
 }

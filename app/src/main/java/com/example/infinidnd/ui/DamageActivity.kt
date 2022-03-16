@@ -15,6 +15,7 @@ import com.example.infinidnd.R
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.githubsearchwithsettings.data.LoadingStatus
 import com.example.infinidnd.data.AllData
 import com.example.infinidnd.data.DamageTypeDetails
 import com.google.android.material.card.MaterialCardView
@@ -41,14 +42,12 @@ class DamageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_damage)
 
         searchBox = findViewById(R.id.damage_search_box)
-
         searchResultsRV = findViewById(R.id.rv_search_results)
         searchErrorTV = findViewById(R.id.tv_search_error)
         loadingIndicator = findViewById(R.id.loading_indicator)
 
         searchResultsRV.layoutManager = LinearLayoutManager(this)
         searchResultsRV.setHasFixedSize(true)
-
         searchResultsRV.adapter = allDataAdapter
 
         detailsNameTV = findViewById(R.id.tv_damage_name)
@@ -82,8 +81,6 @@ class DamageActivity : AppCompatActivity() {
             damageDetails.visibility = View.VISIBLE
         }
 
-        viewModel.loadAllData("damage-types")
-
         viewModel.nameList.observe(this) { nameList ->
             if(!nameList.isNullOrEmpty()) {
                 val adapter = ArrayAdapter(
@@ -91,6 +88,32 @@ class DamageActivity : AppCompatActivity() {
                     android.R.layout.simple_list_item_1, nameList
                 )
                 searchBox.setAdapter(adapter)
+            }
+        }
+
+        viewModel.loadAllData("damage-types")
+
+        viewModel.loadingStatus.observe(this) { uiState ->
+            when (uiState) {
+                LoadingStatus.LOADING -> {
+                    loadingIndicator.visibility = View.VISIBLE
+                    searchResultsRV.visibility = View.INVISIBLE
+                    searchErrorTV.visibility = View.INVISIBLE
+                    damageDetails.visibility = View.GONE
+                }
+                LoadingStatus.ERROR -> {
+                    loadingIndicator.visibility = View.INVISIBLE
+                    searchResultsRV.visibility = View.INVISIBLE
+                    searchErrorTV.visibility = View.VISIBLE
+                    damageDetails.visibility = View.GONE
+                }
+                else -> {
+                    loadingIndicator.visibility = View.INVISIBLE
+                    if(detailsNameTV.text.isNullOrEmpty()) {
+                        searchResultsRV.visibility = View.VISIBLE
+                    }
+                    searchErrorTV.visibility = View.INVISIBLE
+                }
             }
         }
 
@@ -111,6 +134,7 @@ class DamageActivity : AppCompatActivity() {
             searchBox.text.clear()
             searchResultsRV.visibility = View.VISIBLE
             damageDetails.visibility = View.INVISIBLE
+            searchErrorTV.visibility = View.INVISIBLE
         }
     }
 

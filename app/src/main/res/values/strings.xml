@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">InfiniDnD</string>
-    <string name="search_error">We were unable to execute your search.  Please check your internet connection and try again.</string>
+    <string name="search_error">There were no results for your search.  Please try again.</string>
 
     <string name="pref_mode_entry_dark">2 Wide</string>
     <string name="pref_mode_entry_light">1 Wide</string>

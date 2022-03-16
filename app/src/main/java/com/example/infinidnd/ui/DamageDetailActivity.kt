@@ -7,18 +7,25 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.android.githubsearchwithsettings.data.LoadingStatus
 import com.example.infinidnd.R
 import com.example.infinidnd.data.AllData
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
+import org.w3c.dom.Text
 
 const val EXTRA_DAMAGE_DATA = "com.example.infinidnd.AllData"
 
 class DamageDetailActivity : AppCompatActivity() {
 
     private var damageData: AllData? = null
+    private lateinit var damageDescTV: TextView
+    private lateinit var searchErrorTV: TextView
+    private lateinit var loadingIndicator: CircularProgressIndicator
     private val viewModel: DamageViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +36,32 @@ class DamageDetailActivity : AppCompatActivity() {
             damageData = intent.getSerializableExtra(EXTRA_DAMAGE_DATA) as AllData
             findViewById<TextView>(R.id.tv_damage_name).text = damageData!!.name
 
+            damageDescTV = findViewById(R.id.tv_damage_desc)
+            searchErrorTV = findViewById(R.id.tv_search_error)
+            loadingIndicator = findViewById(R.id.loading_indicator)
+
             viewModel.searchResults.observe(this) { damageTypeDetails ->
-                findViewById<TextView>(R.id.tv_damage_desc).text = damageTypeDetails?.desc?.get(0)
+                damageDescTV.text = damageTypeDetails?.desc?.get(0)
+            }
+
+            viewModel.loadingStatus.observe(this) { uiState ->
+                when (uiState) {
+                    LoadingStatus.LOADING -> {
+                        loadingIndicator.visibility = View.VISIBLE
+                        damageDescTV.visibility = View.INVISIBLE
+                        searchErrorTV.visibility = View.INVISIBLE
+                    }
+                    LoadingStatus.ERROR -> {
+                        loadingIndicator.visibility = View.INVISIBLE
+                        damageDescTV.visibility = View.INVISIBLE
+                        searchErrorTV.visibility = View.VISIBLE
+                    }
+                    else -> {
+                        loadingIndicator.visibility = View.INVISIBLE
+                        damageDescTV.visibility = View.VISIBLE
+                        searchErrorTV.visibility = View.INVISIBLE
+                    }
+                }
             }
 
             viewModel.loadSearchResults(damageData!!.index)
