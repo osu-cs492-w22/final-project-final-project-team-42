@@ -15,21 +15,27 @@
         android:textSize="32sp"
         android:hint="Search Magic Schools"/>
 
-    <Button
-        android:id="@+id/btn_search"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="4dp"
-        style="?attr/materialButtonStyle"
-        android:text="Search" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btn_clear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="4dp"
-        style="?attr/materialButtonStyle"
-        android:text="Clear" />
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="188sp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            style="?attr/materialButtonStyle"
+            android:text="Search" />
+
+        <Button
+            android:id="@+id/btn_clear"
+            android:layout_width="188sp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            style="?attr/materialButtonStyle"
+            android:text="Clear" />
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -51,20 +57,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?attr/textAppearanceHeadline5"
-                android:padding="16dp"
-                android:text="AHHHH"/>
+                android:padding="16dp" />
 
             <TextView
                 android:id="@+id/tv_index"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible" />
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_url"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible" />
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_desc"
@@ -72,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?attr/textAppearanceHeadline5"
                 android:padding="16dp"
-                android:visibility="invisible"/>
+                android:visibility="gone"/>
 
         </com.google.android.material.card.MaterialCardView>
 

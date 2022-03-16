@@ -14,24 +14,25 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <TextView
-            android:id="@+id/tv_damage_name"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceHeadline3"
-            android:layout_marginBottom="4dp"/>
-
-<!--        <TextView-->
-<!--            android:id="@+id/tv_damage_desc"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textAppearance="?attr/textAppearanceHeadline4"-->
-<!--            android:drawablePadding="8dp"/>-->
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tv_damage_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline3"
+                android:layout_marginBottom="4dp"
+                android:text="Acid"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_damage_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="The corrosive spray of an adult black dragon's breath and the dissolving enzymes secreted by a black pudding deal acid damage."
             android:textAppearance="?attr/textAppearanceBody1"/>
 
     </LinearLayout>
