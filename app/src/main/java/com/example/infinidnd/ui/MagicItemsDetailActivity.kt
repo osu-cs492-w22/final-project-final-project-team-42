@@ -6,11 +6,15 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.android.githubsearchwithsettings.data.LoadingStatus
 import com.example.infinidnd.R
 import com.example.infinidnd.data.AllData
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 
 const val EXTRA_MAGIC_ITEM_DATA = "com.example.infinidnd.AllData"
@@ -18,6 +22,9 @@ const val EXTRA_MAGIC_ITEM_DATA = "com.example.infinidnd.AllData"
 class MagicItemsDetailActivity : AppCompatActivity() {
 
     private var magicItemData: AllData? = null
+    private lateinit var detailsLL: LinearLayout
+    private lateinit var searchErrorTV: TextView
+    private lateinit var loadingIndicator: CircularProgressIndicator
     private val viewModel: MagicItemsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +34,10 @@ class MagicItemsDetailActivity : AppCompatActivity() {
         if (intent != null && intent.hasExtra(EXTRA_MAGIC_ITEM_DATA)) {
             magicItemData = intent.getSerializableExtra(EXTRA_MAGIC_ITEM_DATA) as AllData
             findViewById<TextView>(R.id.tv_name).text = magicItemData!!.name
+
+            detailsLL = findViewById(R.id.ll_details)
+            searchErrorTV = findViewById(R.id.tv_search_error)
+            loadingIndicator = findViewById(R.id.loading_indicator)
 
             viewModel.loadSearchResults(magicItemData!!.index)
 
@@ -41,6 +52,26 @@ class MagicItemsDetailActivity : AppCompatActivity() {
                 val equipCat = "Equipment Category: " +  magicItemDetails?.equipmentCategory
                 findViewById<TextView>(R.id.tv_equipment_category).text = equipCat
 
+            }
+
+            viewModel.loadingStatus.observe(this) { uiState ->
+                when (uiState) {
+                    LoadingStatus.LOADING -> {
+                        loadingIndicator.visibility = View.VISIBLE
+                        detailsLL.visibility = View.GONE
+                        searchErrorTV.visibility = View.INVISIBLE
+                    }
+                    LoadingStatus.ERROR -> {
+                        loadingIndicator.visibility = View.INVISIBLE
+                        detailsLL.visibility = View.GONE
+                        searchErrorTV.visibility = View.VISIBLE
+                    }
+                    else -> {
+                        loadingIndicator.visibility = View.INVISIBLE
+                        detailsLL.visibility = View.VISIBLE
+                        searchErrorTV.visibility = View.INVISIBLE
+                    }
+                }
             }
         }
     }

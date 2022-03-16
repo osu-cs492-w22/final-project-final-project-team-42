@@ -132,6 +132,7 @@ class SchoolsActivity : AppCompatActivity() {
             searchBox.text.clear()
             searchResultsRV.visibility = View.VISIBLE
             schoolDetails.visibility = View.INVISIBLE
+            searchErrorTV.visibility = View.INVISIBLE
         }
 
     }

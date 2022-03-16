@@ -8,11 +8,14 @@ import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.android.githubsearchwithsettings.data.LoadingStatus
 import com.example.infinidnd.R
 import com.example.infinidnd.data.AllData
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 
 const val EXTRA_SPELLS_DATA = "com.example.infinidnd.AllData"
@@ -20,6 +23,9 @@ const val EXTRA_SPELLS_DATA = "com.example.infinidnd.AllData"
 class SpellsDetailActivity : AppCompatActivity() {
 
     private var spellData: AllData? = null
+    private lateinit var detailsLL: LinearLayout
+    private lateinit var searchErrorTV: TextView
+    private lateinit var loadingIndicator: CircularProgressIndicator
     private val viewModel: SpellsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +35,10 @@ class SpellsDetailActivity : AppCompatActivity() {
         if (intent != null && intent.hasExtra(EXTRA_SPELLS_DATA)) {
             spellData = intent.getSerializableExtra(EXTRA_SPELLS_DATA) as AllData
             findViewById<TextView>(R.id.tv_spell_name).text = spellData!!.name
+
+            detailsLL = findViewById(R.id.ll_details)
+            searchErrorTV = findViewById(R.id.tv_search_error)
+            loadingIndicator = findViewById(R.id.loading_indicator)
 
             viewModel.searchResults.observe(this) { spellDetails ->
                 var temp: String
@@ -121,6 +131,26 @@ class SpellsDetailActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.tv_spell_classes).text = temp
 
 
+            }
+
+            viewModel.loadingStatus.observe(this) { uiState ->
+                when (uiState) {
+                    LoadingStatus.LOADING -> {
+                        loadingIndicator.visibility = View.VISIBLE
+                        detailsLL.visibility = View.GONE
+                        searchErrorTV.visibility = View.INVISIBLE
+                    }
+                    LoadingStatus.ERROR -> {
+                        loadingIndicator.visibility = View.INVISIBLE
+                        detailsLL.visibility = View.GONE
+                        searchErrorTV.visibility = View.VISIBLE
+                    }
+                    else -> {
+                        loadingIndicator.visibility = View.INVISIBLE
+                        detailsLL.visibility = View.VISIBLE
+                        searchErrorTV.visibility = View.INVISIBLE
+                    }
+                }
             }
 
             viewModel.loadSearchResults(spellData!!.index)

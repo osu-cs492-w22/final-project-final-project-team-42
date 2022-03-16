@@ -9,11 +9,14 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.android.githubsearchwithsettings.data.LoadingStatus
 import com.example.infinidnd.R
 import com.example.infinidnd.data.AllData
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 
 const val EXTRA_MONSTER_DATA = "com.example.infinidnd.AllData"
@@ -21,6 +24,9 @@ const val EXTRA_MONSTER_DATA = "com.example.infinidnd.AllData"
 class MonstersDetailActivity : AppCompatActivity() {
 
     private var monsterData: AllData? = null
+    private lateinit var detailsLL: LinearLayout
+    private lateinit var searchErrorTV: TextView
+    private lateinit var loadingIndicator: CircularProgressIndicator
     private val viewModel: MonstersViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +36,10 @@ class MonstersDetailActivity : AppCompatActivity() {
         if (intent != null && intent.hasExtra(EXTRA_DAMAGE_DATA)) {
             monsterData = intent.getSerializableExtra(EXTRA_DAMAGE_DATA) as AllData
             findViewById<TextView>(R.id.tv_monster_name).text = monsterData!!.name
+
+            detailsLL = findViewById(R.id.ll_details)
+            searchErrorTV = findViewById(R.id.tv_search_error)
+            loadingIndicator = findViewById(R.id.loading_indicator)
 
             var temp :String
             viewModel.loadSearchResults(monsterData!!.index)
@@ -199,6 +209,26 @@ class MonstersDetailActivity : AppCompatActivity() {
                     findViewById<TextView>(R.id.tv_monster_legendary_actions).visibility = View.GONE
                 }
 
+            }
+
+            viewModel.loadingStatus.observe(this) { uiState ->
+                when (uiState) {
+                    LoadingStatus.LOADING -> {
+                        loadingIndicator.visibility = View.VISIBLE
+                        detailsLL.visibility = View.GONE
+                        searchErrorTV.visibility = View.INVISIBLE
+                    }
+                    LoadingStatus.ERROR -> {
+                        loadingIndicator.visibility = View.INVISIBLE
+                        detailsLL.visibility = View.GONE
+                        searchErrorTV.visibility = View.VISIBLE
+                    }
+                    else -> {
+                        loadingIndicator.visibility = View.INVISIBLE
+                        detailsLL.visibility = View.VISIBLE
+                        searchErrorTV.visibility = View.INVISIBLE
+                    }
+                }
             }
 
             viewModel.loadSearchResults(monsterData!!.index)

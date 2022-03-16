@@ -14,6 +14,7 @@ import android.widget.*
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.githubsearchwithsettings.data.LoadingStatus
 import com.example.infinidnd.R
 import com.example.infinidnd.data.AllData
 import com.example.infinidnd.data.FeatDetails
@@ -93,7 +94,32 @@ class FeatsActivity : AppCompatActivity() {
                 searchBox.setAdapter(adapter)
             }
         }
+
         viewModel.loadAllData("feats")
+
+        viewModel.loadingStatus.observe(this) { uiState ->
+            when (uiState) {
+                LoadingStatus.LOADING -> {
+                    loadingIndicator.visibility = View.VISIBLE
+                    searchResultsRV.visibility = View.INVISIBLE
+                    searchErrorTV.visibility = View.INVISIBLE
+                    featDetails.visibility = View.GONE
+                }
+                LoadingStatus.ERROR -> {
+                    loadingIndicator.visibility = View.INVISIBLE
+                    searchResultsRV.visibility = View.INVISIBLE
+                    searchErrorTV.visibility = View.VISIBLE
+                    featDetails.visibility = View.GONE
+                }
+                else -> {
+                    loadingIndicator.visibility = View.INVISIBLE
+                    if(detailsNameTV.text.isNullOrEmpty()) {
+                        searchResultsRV.visibility = View.VISIBLE
+                    }
+                    searchErrorTV.visibility = View.INVISIBLE
+                }
+            }
+        }
 
         // onclick for search button - hides overall results, loads
         val searchBtn: Button = findViewById(R.id.btn_search)
@@ -112,6 +138,7 @@ class FeatsActivity : AppCompatActivity() {
             searchBox.text.clear()
             searchResultsRV.visibility = View.VISIBLE
             featDetails.visibility = View.INVISIBLE
+            searchErrorTV.visibility = View.INVISIBLE
         }
 
     }

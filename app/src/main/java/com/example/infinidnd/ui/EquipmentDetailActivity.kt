@@ -8,11 +8,15 @@ import android.os.PersistableBundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.android.githubsearchwithsettings.data.LoadingStatus
 import com.example.infinidnd.R
 import com.example.infinidnd.data.AllData
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 import org.w3c.dom.Text
 
@@ -21,6 +25,9 @@ const val EXTRA_EQUIPMENT_DATA = "com.example.infinidnd.AllData"
 class EquipmentDetailActivity : AppCompatActivity() {
 
     private var equipmentData: AllData? = null
+    private lateinit var detailsLL: LinearLayout
+    private lateinit var searchErrorTV: TextView
+    private lateinit var loadingIndicator: CircularProgressIndicator
     private val viewModel: EquipmentViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +37,10 @@ class EquipmentDetailActivity : AppCompatActivity() {
         if (intent != null && intent.hasExtra(EXTRA_DAMAGE_DATA)) {
             equipmentData = intent.getSerializableExtra(EXTRA_EQUIPMENT_DATA) as AllData
             findViewById<TextView>(R.id.tv_equipment_name).text = equipmentData!!.name
+
+            detailsLL = findViewById(R.id.ll_details)
+            searchErrorTV = findViewById(R.id.tv_search_error)
+            loadingIndicator = findViewById(R.id.loading_indicator)
 
             viewModel.loadSearchResults(equipmentData!!.index)
             viewModel.searchResults.observe(this) { equipmentDetails ->
@@ -68,6 +79,26 @@ class EquipmentDetailActivity : AppCompatActivity() {
                     if(!equipmentDetails?.description.isNullOrEmpty()) {
                         findViewById<TextView>(R.id.tv_equipment_dmg_dice).text =
                             equipmentDetails?.description?.get(0)
+                    }
+                }
+            }
+
+            viewModel.loadingStatus.observe(this) { uiState ->
+                when (uiState) {
+                    LoadingStatus.LOADING -> {
+                        loadingIndicator.visibility = View.VISIBLE
+                        detailsLL.visibility = View.GONE
+                        searchErrorTV.visibility = View.INVISIBLE
+                    }
+                    LoadingStatus.ERROR -> {
+                        loadingIndicator.visibility = View.INVISIBLE
+                        detailsLL.visibility = View.GONE
+                        searchErrorTV.visibility = View.VISIBLE
+                    }
+                    else -> {
+                        loadingIndicator.visibility = View.INVISIBLE
+                        detailsLL.visibility = View.VISIBLE
+                        searchErrorTV.visibility = View.INVISIBLE
                     }
                 }
             }

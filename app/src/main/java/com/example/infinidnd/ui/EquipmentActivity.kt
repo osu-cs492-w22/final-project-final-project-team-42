@@ -10,13 +10,12 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.*
 import com.example.infinidnd.R
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.githubsearchwithsettings.data.LoadingStatus
 import com.example.infinidnd.data.AllData
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.progressindicator.CircularProgressIndicator
@@ -28,7 +27,7 @@ class EquipmentActivity : AppCompatActivity() {
     private val viewModel: EquipmentViewModel by viewModels()
 
     private lateinit var searchResultsRV: RecyclerView
-    private lateinit var searchBox: EditText
+    private lateinit var searchBox: AutoCompleteTextView
     private lateinit var searchErrorTV: TextView
     private lateinit var loadingIndicator: CircularProgressIndicator
     private lateinit var detailsNameTV: TextView
@@ -48,7 +47,6 @@ class EquipmentActivity : AppCompatActivity() {
 
         searchResultsRV.layoutManager = LinearLayoutManager(this)
         searchResultsRV.setHasFixedSize(true)
-
         searchResultsRV.adapter = allDataAdapter
 
         detailsNameTV = findViewById(R.id.tv_damage_name)
@@ -72,7 +70,6 @@ class EquipmentActivity : AppCompatActivity() {
         }
 
         viewModel.searchResults.observe(this) { damageTypeDetails ->
-
             Log.d("Damage Type Details", "$damageTypeDetails")
             detailsNameTV.text = damageTypeDetails?.name
             detailsIndexTV.text = damageTypeDetails?.index
@@ -80,7 +77,41 @@ class EquipmentActivity : AppCompatActivity() {
             damageDetails.visibility = View.VISIBLE
         }
 
+        viewModel.nameList.observe(this) { nameList ->
+            if(!nameList.isNullOrEmpty()) {
+                val adapter = ArrayAdapter(
+                    this,
+                    android.R.layout.simple_list_item_1, nameList
+                )
+                searchBox.setAdapter(adapter)
+            }
+        }
+
         viewModel.loadAllData("equipment")
+
+        viewModel.loadingStatus.observe(this) { uiState ->
+            when (uiState) {
+                LoadingStatus.LOADING -> {
+                    loadingIndicator.visibility = View.VISIBLE
+                    searchResultsRV.visibility = View.INVISIBLE
+                    searchErrorTV.visibility = View.INVISIBLE
+                    damageDetails.visibility = View.GONE
+                }
+                LoadingStatus.ERROR -> {
+                    loadingIndicator.visibility = View.INVISIBLE
+                    searchResultsRV.visibility = View.INVISIBLE
+                    searchErrorTV.visibility = View.VISIBLE
+                    damageDetails.visibility = View.GONE
+                }
+                else -> {
+                    loadingIndicator.visibility = View.INVISIBLE
+                    if(detailsNameTV.text.isNullOrEmpty()) {
+                        searchResultsRV.visibility = View.VISIBLE
+                    }
+                    searchErrorTV.visibility = View.INVISIBLE
+                }
+            }
+        }
 
         // onclick for search button - hides overall results, loads
         val searchBtn: Button = findViewById(R.id.btn_search)
@@ -99,6 +130,7 @@ class EquipmentActivity : AppCompatActivity() {
             searchBox.text.clear()
             searchResultsRV.visibility = View.VISIBLE
             damageDetails.visibility = View.INVISIBLE
+            searchErrorTV.visibility = View.INVISIBLE
         }
     }
 
