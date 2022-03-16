@@ -4,11 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_condition_detail.xml" value="0.30611372381359553" />
+        <entry key="app/src/main/res/layout/activity_conditions.xml" value="0.30611372381359553" />
         <entry key="app/src/main/res/layout/activity_damage.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_damage_detail.xml" value="0.20172257479601088" />
         <entry key="app/src/main/res/layout/activity_equipment.xml" value="0.14921223354958293" />
         <entry key="app/src/main/res/layout/activity_equipment_detail.xml" value="0.14187212703719182" />
         <entry key="app/src/main/res/layout/activity_feat_detail.xml" value="0.14921223354958293" />
+        <entry key="app/src/main/res/layout/activity_feats.xml" value="0.30611372381359553" />
         <entry key="app/src/main/res/layout/activity_magic_item_detail.xml" value="0.14921223354958293" />
         <entry key="app/src/main/res/layout/activity_magic_items.xml" value="0.14921223354958293" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.31865284974093266" />
