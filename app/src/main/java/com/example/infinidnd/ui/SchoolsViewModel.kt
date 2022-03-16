@@ -20,12 +20,20 @@ class SchoolsViewModel : ViewModel() {
     private val _searchResults = MutableLiveData<MagicSchoolDetails>(null)
     val searchResults: LiveData<MagicSchoolDetails?> = _searchResults
 
+    private val _nameList = MutableLiveData<List<String>>(null)
+    val nameList: LiveData<List<String>> = _nameList
+
     fun loadAllData(
         type: String
     ) {
         viewModelScope.launch {
             val result = alLDataRepository.loadAllData(type)
             _allTypes.value = result.getOrNull()
+            var names : List<String> = listOf()
+            for (i in _allTypes.value!!){
+                names += i.index
+            }
+            _nameList.value = names
         }
     }
 
