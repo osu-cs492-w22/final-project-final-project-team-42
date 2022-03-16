@@ -51,20 +51,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?attr/textAppearanceHeadline5"
-                android:padding="16dp"
-                android:text="AHHHH"/>
+                android:padding="16dp"/>
 
             <TextView
                 android:id="@+id/tv_damage_index"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible" />
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_damage_url"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible" />
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_damage_desc"
@@ -72,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?attr/textAppearanceHeadline5"
                 android:padding="16dp"
-                android:visibility="invisible"/>
+                android:visibility="gone" />
 
         </com.google.android.material.card.MaterialCardView>
 

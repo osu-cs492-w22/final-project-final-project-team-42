@@ -16,55 +16,59 @@
 
         <Button
             android:id="@+id/button_monster"
-            android:layout_width="150dp"
+            android:layout_width="170dp"
             android:layout_height="70dp"
             android:text="Monsters"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/button_spells"
-            android:layout_width="150dp"
-            android:layout_height="70dp"
-            android:text="Spells"
-            app:layout_constraintStart_toStartOf="@+id/button_equipment"
-            app:layout_constraintTop_toBottomOf="@+id/button_equipment" />
-
-        <Button
-            android:id="@+id/button_feats"
-            android:layout_width="150dp"
-            android:layout_height="70dp"
-            android:text="Feats" />
-
-        <Button
-            android:id="@+id/button_schools"
-            android:layout_width="150dp"
-            android:layout_height="70dp"
-            android:text="Magic Schools" />
-
-        <Button
-            android:id="@+id/button_damage"
-            android:layout_width="150dp"
-            android:layout_height="70dp"
-            android:text="Damage Types" />
-
-        <Button
-            android:id="@+id/button_conditions"
-            android:layout_width="150dp"
-            android:layout_height="70dp"
-            android:text="Conditions" />
+            android:drawableLeft="@drawable/outline_bug_report_white_24"/>
 
         <Button
             android:id="@+id/button_equipment"
-            android:layout_width="150dp"
+            android:layout_width="170dp"
             android:layout_height="70dp"
-            android:text="Equipment" />
+            android:text="Equipment"
+            android:drawableLeft="@drawable/outline_backpack_white_24"/>
+
+        <Button
+            android:id="@+id/button_spells"
+            android:layout_width="170dp"
+            android:layout_height="70dp"
+            android:text="Spells"
+            android:drawableLeft="@drawable/outline_book_white_24"/>
 
         <Button
             android:id="@+id/button_magic_items"
-            android:layout_width="150dp"
+            android:layout_width="170dp"
             android:layout_height="70dp"
-            android:text="Magic Items" />
+            android:text="Magic Items"
+            android:drawableLeft="@drawable/outline_brush_white_24"/>
+
+        <Button
+            android:id="@+id/button_feats"
+            android:layout_width="170dp"
+            android:layout_height="70dp"
+            android:text="Feats"
+            android:drawableLeft="@drawable/outline_fitness_center_white_24"/>
+
+        <Button
+            android:id="@+id/button_conditions"
+            android:layout_width="170dp"
+            android:layout_height="70dp"
+            android:text="Conditions"
+            android:drawableLeft="@drawable/outline_coronavirus_white_24"/>
+
+        <Button
+            android:id="@+id/button_damage"
+            android:layout_width="170dp"
+            android:layout_height="70dp"
+            android:text="Damage Types"
+            android:drawableLeft="@drawable/outline_whatshot_white_24"/>
+
+        <Button
+            android:id="@+id/button_schools"
+            android:layout_width="170dp"
+            android:layout_height="70dp"
+            android:text="Magic Schools"
+            android:drawableLeft="@drawable/outline_science_white_24" />
     </LinearLayout>
 
 
