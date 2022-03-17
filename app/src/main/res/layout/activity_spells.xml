@@ -50,7 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/damage_details"
-            android:layout_margin="8dp">
+            android:layout_margin="8dp"
+            app:cardElevation="18dp">
 
             <TextView
                 android:id="@+id/tv_damage_name"
