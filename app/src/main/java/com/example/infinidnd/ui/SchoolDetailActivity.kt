@@ -83,7 +83,7 @@ class SchoolDetailActivity : AppCompatActivity() {
     }
 
     private fun viewOnWeb() {
-        val intent: Intent = Uri.parse("https://www.dndbeyond.com/classes/wizard#SchoolofAbjuration").let {
+        val intent: Intent = Uri.parse("https://www.dndbeyond.com/classes/wizard#ArcaneTraditions").let {
             Intent(Intent.ACTION_VIEW, it)
         }
         try {
